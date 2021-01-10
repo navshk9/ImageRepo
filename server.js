@@ -25,9 +25,9 @@ var HTTP_PORT = process.env.PORT || 8080;
 /* #region CONFIGURATIONS */
 
 // create the photos folder in public directory if it doesn't already exist
-if (!fs.existsSync(PHOTODIRECTORY)) {
-    fs.mkdirSync(PHOTODIRECTORY);
-}
+//if (!fs.existsSync(PHOTODIRECTORY)) {
+//    fs.mkdirSync(PHOTODIRECTORY);
+//}
 
 // declaration for serving static files in express 
 app.use(express.static('views'));
