@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>Image Repository</title>
+  {{>bootstrap}}
+</head>
+
+<body>
+    <h1>Image Repository</h1>
+    {{> header user}}
+    {{>navigation}}
+    {{#if errorMsg}}
+        <h5 class="text">{{errorMsg}}</h5>
+    {{else}}
+        <p>Choose images to upload.</p>
+    {{/if}}
+    <form method="POST" action="/add" enctype="multipart/form-data">
+        <table style="border: 1px solid #aaaaaa; padding: 6px;">
+            <tr>
+                <td><label class="fixedlabel">Upload Photos</label></td>
+                <td><input name="photos" type="file" multiple><br/></td>
+            </tr>
+            {{#if user}}
+            <tr>
+                <td><label class="fixedlabel">Make Private</label></td>
+                <td><input name="private" type="checkbox"><br/></td>
+            </tr>
+            {{/if}}
+            <tr>
+                <td><label class="fixedlabel"></label></td>
+                <td><button type="submit">Submit</button></td>
+            </tr>
+        </table>
+    </form>
+</body>
+
+</html>

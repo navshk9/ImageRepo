@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>Image Repository</title>
+  {{>bootstrap}}
+</head>
+
+<body>
+    <h1>Image Repository</h1>
+    {{> header user}}
+    {{>navigation}}
+    
+    <h3 class = "text">Welcome to your dashboard {{user.firstname}}!</h3>
+
+    <p class = "text">Here is the information we have on your file for you:</p>
+    <table style="border: 1px solid #aaaaaa; padding: 6px;">
+        <tr>
+            <td><h4 class = "text">First name: {{user.firstname}}</h4></td>
+        </tr>
+        <tr>
+            <td><h4 class = "text">Last name: {{user.lastname}}</h4></td>
+        </tr>
+        <tr>
+            <td><h4 class = "text">Username: {{user.username}}</h4></td>
+        </tr>
+    </table>
+</body>
+
+</html>

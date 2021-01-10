@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>Image Repository</title>
+  {{>bootstrap}}
+</head>
+
+<body>
+    <h1>Image Repository</h1>
+    {{> header user}}
+    {{>navigation}}
+    {{#if errorMsg}}
+        <h5 class="text">{{errorMsg}}</h5>
+    {{else}}
+        <h5 class="text">Please login below</h5>
+    {{/if}}
+    {{#if user}}
+        <p class="text"> You are already logged in, <a href="/logout">logout</a></p>
+    {{else}}
+    <form method="post" action="/login">
+        <table style="border: 1px solid #aaaaaa; padding: 6px;">
+            <tr>
+                <td><label class="fixedlabel">Username</label></td>
+                <td><input name="username" type="text"><br/></td>
+            </tr>
+            <tr>
+                <td><label class="fixedlabel">Password</label></td>
+                <td><input name="password" type="password"><br/></td>
+            </tr>
+            <tr>
+                <td><label class="fixedlabel"></td>
+                <td></label><button type="submit">Login</button></td>
+            </tr>
+        </table>
+    </form>
+    {{/if}}
+    <a href="/register">Don't have an account? Click here to regsiter.</a>
+</body>
+
+</html>

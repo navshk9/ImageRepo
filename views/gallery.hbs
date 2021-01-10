@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+<head>
+  <title>Image Repository</title>
+  {{>bootstrap}}
+</head>
+<body>
+    <h1>Image Repository</h1>
+    {{> header user}}
+    {{>navigation}}
+    {{#if hasPhotos}}
+    
+    <!-- Cards -->
+    <section class="cards">
+        {{#each photos}}
+        <div class="card">
+            <div class ="image">
+                <img src="/photos/{{filename}}"/>
+            </div>
+            <div class ="content">
+                <p class="date">Upload date: {{uploadDate}}</p>
+                <p class="owner">Uploaded by: {{owner}}</p>
+            </div>
+        </div>
+        {{/each}}
+    {{else}}
+    <p>No photos have been uploaded yet.</p>
+    {{/if}}
+    </section>
+</body>
+</html>

@@ -1,0 +1,30 @@
+/* Image Gallergy */
+.cards {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.card {
+    transition: transform .3s;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+}
+
+.card:hover {
+    -ms-transform: scale(1.01); /* IE 9 */
+    -webkit-transform: scale(1.01); /* Safari 3-8 */
+    transform: scale(1.01); 
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);  
+}
+
+img {
+    max-width: 100%;
+}
+
+/* Delete Logo */
+.remove img {
+    width:24px;
+    height: 24px;
+}

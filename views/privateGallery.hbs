@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+<head>
+  <title>Image Repository</title>
+  {{>bootstrap}}
+</head>
+<body>
+    <h1>Image Repository</h1>
+    {{> header user}}
+    {{>navigation}}
+    {{#if hasPhotos}}
+    
+    <!-- Remove All Images -->
+    <div class="remove-all" title="Remove photos">
+        <form action="/remove-all" method="post">
+            <button type="submit">
+                Remove All
+            </button>
+        </form>
+    </div>
+
+    <!-- Cards -->
+    <section class="cards">
+        {{#each photos}}
+        <div class="card">
+            <div class ="image">
+                <img src="/photos/{{filename}}"/>
+            </div>
+            <div class ="content">
+                <p class="date">Upload date: {{uploadDate}}</p>
+                <p class="owner">Uploaded by: {{owner}}</p>
+                <p class="private">Private: {{private}}</p>
+                <div class="remove" title="Remove photo">
+                    <form action="/remove/{{filename}}" method="post">
+                        <button type="submit">
+                            <img src="images/delete.png"/>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    {{else}}
+    <p>No photos have been uploaded yet.</p>
+    {{/if}}
+    </section>
+</body>
+</html>

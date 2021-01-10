@@ -1,0 +1,9 @@
+<h4 class="session-text">
+    {{#if username}}
+        Welcome <em>{{firstname}}</em> |
+        <a href="/dashboard">mydashboard</a> | 
+        <a href="/logout">logout</a>
+    {{else}}
+        myAccount: <a href="/login">login</a>
+    {{/if}}
+</h4>
