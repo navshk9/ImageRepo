@@ -13,3 +13,15 @@ User can choose to create their own account, however, for testing purposes, you 
 username: nav
 password: nav
 ```
+
+## Live Website Link
+
+https://nameless-savannah-87648.herokuapp.com/
+
+## Please Note
+
+Some things to consider when testing this app:
+The files are being stores on the heroku server's local directory, which means it has a certain limit. For this test demostration, the file upload limit is 10
+and the application takes 3-5 seconds to finish uploading. 
+
+
