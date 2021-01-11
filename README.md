@@ -22,6 +22,9 @@ https://nameless-savannah-87648.herokuapp.com/
 
 Some things to consider when testing this app:
 The files are being stores on the heroku server's local directory, which means it has a certain limit. For this test demostration, the file upload limit is 10
-and the application takes 3-5 seconds to finish uploading. 
+and the application take a couple of seconds to finish uploading. 
 
+## Demo
+
+https://www.youtube.com/watch?v=fwSYuRh9vyA&feature=youtu.be
 
