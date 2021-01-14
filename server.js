@@ -46,7 +46,7 @@ const STORAGE = multer.diskStorage({
 });
 
 // setting multer storage location and limits
-const UPLOAD = multer({storage: STORAGE, limits : { files: 10 }});
+const UPLOAD = multer({storage: STORAGE, limits : { files: 10 }}).array("photos", 10);
 
 // connection to mongoDB Atlas database (Database URL stored in dotenv file)
 mongoose.connect(process.env.DB_URL, {useNewUrlParser: 
@@ -198,34 +198,41 @@ app.get("/logout", (req,res) =>{
   res.redirect("/");
 })
 
-app.post("/add", checkLogin, UPLOAD.array("photos", 10),(req,res) => {
-  var m_owner = "none";
-  if (req.session.user){
-    m_owner = req.session.user.username;
-  }
-  if (req.files < 1){
-    return res.render("upload", {errorMsg: "Must select an image to upload", user: req.session.user, layout: false});
-  }
-  if (req.files.length >= 10){
-    return res.render("upload", {errorMsg: "Cannot upload more than 10 images at a time", user: req.session.user, layout: false});
-  }
-  else {
-    for (var file of req.files ){
-      const FORM_FILE = file;
-      var picture = FORM_FILE.filename;
-      const photo = new PhotoModel({
-          filename: picture,
-          private: req.body.private,
-          owner: m_owner
-      });
-      photo.save((err)=>{
+app.post("/add", checkLogin, (req,res) => {
+  UPLOAD(req, res, err => {
+    if (err instanceof multer.MulterError) {
+      console.log("multer error");
+      return res.render("upload", {errorMsg: "Cannot upload more than 10 images at a time.", user: req.session.user, layout: false});
+    } 
+    else if (err) {
+      console.log("unknown error");
+      return res.render("upload", {errorMsg: "Could not upload images, please try again.", user: req.session.user, layout: false});
+    }
+    var m_owner = "none";
+    if (req.session.user){
+      m_owner = req.session.user.username;
+    }
+    if (req.files < 1){
+      return res.render("upload", {errorMsg: "Must select an image to upload", user: req.session.user, layout: false});
+    }
+    else {
+      for (var file of req.files ){
+        const FORM_FILE = file;
+        var picture = FORM_FILE.filename;
+        const photo = new PhotoModel({
+            filename: picture,
+            private: req.body.private,
+            owner: m_owner
+        });
+        photo.save((err)=>{
           if(err) {
-              console.log("There was an error saving the photo.");
+            console.log("There was an error saving the photo.");
           }
-      });
-     }
+        });
+      }
       res.redirect("/privateGallery");
-  }
+    }
+  })
 });
 
 app.post("/remove/:filename", (req, res) => {
