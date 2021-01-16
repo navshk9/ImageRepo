@@ -45,8 +45,22 @@ const STORAGE = multer.diskStorage({
     }
 });
 
+// file type limitations
+var fileFilter = function(req, file, cb) {
+  // supported image file mimetypes
+  var allowedMimes = ['image/jpeg', 'image/pjpeg', 'image/png', 'image/gif'];
+  
+  if (_.includes(allowedMimes, file.mimetype)) {
+  // allow supported image files
+  cb(null, true);
+  } else {
+  // throw error for invalid files
+  cb(new Error('Invalid file type. Only jpg, png and gif image files are allowed.'));
+  }
+};
+
 // setting multer storage location and limits
-const UPLOAD = multer({storage: STORAGE, limits : { files: 10 }}).array("photos", 10);
+const UPLOAD = multer({storage: STORAGE, fileFilter: fileFilter, limits : { files: 10, fileSize: 1024 * 1024 }}).array("photos", 10);
 
 // connection to mongoDB Atlas database (Database URL stored in dotenv file)
 mongoose.connect(process.env.DB_URL, {useNewUrlParser: 
@@ -202,11 +216,11 @@ app.post("/add", checkLogin, (req,res) => {
   UPLOAD(req, res, err => {
     if (err instanceof multer.MulterError) {
       console.log("multer error");
-      return res.render("upload", {errorMsg: "Cannot upload more than 10 images at a time.", user: req.session.user, layout: false});
+      return res.render("upload", {errorMsg: "Cannot upload more than 10 images (more than 1MB) at a time.", user: req.session.user, layout: false});
     } 
     else if (err) {
       console.log("unknown error");
-      return res.render("upload", {errorMsg: "Could not upload images, please try again.", user: req.session.user, layout: false});
+      return res.render("upload", {errorMsg: "Unsupported file type, please try again.", user: req.session.user, layout: false});
     }
     var m_owner = "none";
     if (req.session.user){
