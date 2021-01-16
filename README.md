@@ -39,9 +39,12 @@ https://www.youtube.com/watch?v=fwSYuRh9vyA&feature=youtu.be
 - [x] Deleting all user images
 - [x] Login Authentication
 - [x] Private and Public Images
+- [x] Error handling for file type and size
 - [ ] Use Amazon S3 file system to store images
 - [ ] Delete selected images
 - [ ] Edit image privacy settings (private/public) after upload
 - [ ] Adding drag and drop upload option
-- [ ] Error handling for file type and size
+- [ ] Implement intersection observer API to load more data on scroll
+
+
 
